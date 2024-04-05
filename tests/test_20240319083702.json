@@ -1,0 +1,23 @@
+[
+    {
+        "question": "asd",
+        "type": "выбор",
+        "answer": "sdf",
+        "options": [
+            "sdf",
+            " dfg",
+            " fh",
+            "xcv"
+        ]
+    },
+    {
+        "question": "hgf",
+        "type": "выбор",
+        "answer": "asd",
+        "options": [
+            "zxc",
+            " asd",
+            " hgf"
+        ]
+    }
+]
