@@ -1,27 +1,43 @@
-import tkinter as tk
-import login
+from PySide2 import QtWidgets
+import sys
+import os
+import csv
+from PySide2.QtWidgets import QMessageBox
+import registration_window, login_window
+
+class MainApp(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle("Главное меню")
+        self.setGeometry(300, 300, 600, 400)
+
+        self.stack = QtWidgets.QStackedWidget(self)
+        self.loginWindow = LoginWindow()
+        self.registrationWindow = RegistrationWindow()
+
+        self.stack.addWidget(self.loginWindow)
+        self.stack.addWidget(self.registrationWindow)
+
+        self.loginButton = QtWidgets.QPushButton("Войти", self)
+        self.loginButton.clicked.connect(self.displayLogin)
+        self.loginButton.setGeometry(10, 350, 100, 40)
+
+        self.registerButton = QtWidgets.QPushButton("Зарегистрироваться", self)
+        self.registerButton.clicked.connect(self.displayRegistration)
+        self.registerButton.setGeometry(120, 350, 150, 40)
+
+    def displayLogin(self):
+        self.stack.setCurrentWidget(self.loginWindow)
+
+    def displayRegistration(self):
+        self.stack.setCurrentWidget(self.registrationWindow)
 
 
-window = tk.Tk()
-window.title("Главное меню")
-window.geometry("600x400")
-login_var = login.LoginTab()
-
-
-def logining():
-    window.destroy()
-    login_var.run()
-
-
-def registration():
-    window.destroy()
-    import registration
-
-
-button = tk.Button(window, text="Войти", command=logining)
-button.grid(row=100, columnspan=2, padx=10, pady=5, sticky=tk.W)
-
-button = tk.Button(window, text="Зарегистрироваться", command=registration)
-button.grid(row=4, columnspan=2, padx=10, pady=5, sticky=tk.W)
-
-window.mainloop()
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    mainApp = MainApp()
+    mainApp.show()
+    sys.exit(app.exec_())

@@ -1,6 +1,0 @@
-student|qwerty|Ученик
-teacher|ytrewq|Учитель
-login|password|Ученик
-g|h|Учитель
-
-

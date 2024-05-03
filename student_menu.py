@@ -1,16 +1,13 @@
 import tkinter as tk
 from tkinter import filedialog
 import os
-import project
-import login
+from test_system import start
 
 window = tk.Tk()
 window.title("Вход в аккаунт")
 window.geometry("600x400")
 
 selected_item_text = ""
-
-login_var = login.LoginTab()
 
 
 def import_files():
@@ -28,12 +25,11 @@ def run_selected_file(self):
     if selected_index:
         selected_item_text = file_listbox.get(selected_index[0])
         window.destroy()
-    testing = project.TestingSystem(selected_index)
-    testing.run()
+    start(selected_index)
 
 
 def read_login_file():
-    with open(r'C:\Users\user\Desktop\project programm\login.txt', 'r', encoding='utf-8') as file:
+    with open('login', 'r', encoding='utf-8') as file:
         lines = file.readlines()
         for line in lines:
             parts = line.strip().split('|')
@@ -45,7 +41,7 @@ username = tk.Label()
 
 file_listbox = tk.Listbox(window, selectmode=tk.MULTIPLE)
 file_listbox.pack(pady=10)
-# file_listbox.bind("<Double-Button-1>", login_var.get_login())
+file_listbox.bind("<Double-Button-1>", run_selected_file)
 
 import_button = tk.Button(window, text="Импортировать файлы", command=import_files)
 import_button.pack(pady=10)
